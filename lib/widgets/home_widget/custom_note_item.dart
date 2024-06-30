@@ -26,8 +26,31 @@ class _CustomNoteItemState extends State<CustomNoteItem> {
                     )));
       },
       onLongPress: () {
-        widget.note.delete();
-        BlocProvider.of<NotesCubit>(context).fetchAllData();
+        showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: const Text('Delete Note'),
+                content:
+                    const Text('Are you sure you want to delete this note?'),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text('Cancel')),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        widget.note.delete();
+                        BlocProvider.of<NotesCubit>(context).fetchAllData();
+                      },
+                      child: const Text('Delete')),
+                ],
+              );
+            });
+        // widget.note.delete();
+        // BlocProvider.of<NotesCubit>(context).fetchAllData();
       },
       child: Container(
         padding: const EdgeInsets.only(top: 6, bottom: 6, left: 6, right: 5),
