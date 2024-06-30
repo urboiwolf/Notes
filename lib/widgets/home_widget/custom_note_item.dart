@@ -30,6 +30,7 @@ class _CustomNoteItemState extends State<CustomNoteItem> {
             context: context,
             builder: (context) {
               return AlertDialog(
+
                 title: const Text('Delete Note'),
                 content:
                     const Text('Are you sure you want to delete this note?'),
